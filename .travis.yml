@@ -1,0 +1,20 @@
+env:
+  global:
+    - secure: tgnbMSjWL5Vi1LNWjGdkEPk16ewjxyot9r56nfttYsSW/ochziSgST8IbTj9dn/iz9PoNGEdzJvi3Cm+8LtaHoktVKuP1ndUDGGA5RIMfGjZQl4XC3GYxpakbJ0frHK/Aof1sILf9pR0ysF5wJ8Mdf98P1wLDKMP7Yti0+50dYsO+RY7Oxq1lL2vbDJwkPLYx0pELoRY4TqfdzCXiVjEB0Y4iSg/SxAirFj4A7DbFTi+ySj8K8nQiiXpOINrx0knmQIQr3zP8DS6dwMoWfQIFTyXW9URPaGI5iqAPfZF/7jWvT1IvLtoLXoUlfBNxce8WTZM7f6zgBq3LGAEiTSCNHg9wtdiEzXog0V2sXQb340kCisFK8bOHrwbYnG+zPjNe3ql992v1bNwl2esNIPleF20lh+3vmT/6zdRz/wYYeF4JlutTvNnZrIpY9DWHfjDU5H8lBrEcYvb1OJvpHOg4GbDvpZUB0T3CgmDnHTHM4XOKCOqrw2Qfh43TrTkADk/UUM4RwgMvbevB0/7b/qK9oZFrZ3KsCAS6XHKMeHxoq1woxHRbc5TkjaUAk1heaFRaHTdB90jTmQG+xZE5wddi7dU4N8Wh+EoXwvB/7tblA1EJ6Pn+0trU0df2VTX6uPDbiGzY2oDds9e0ZBC/VRE4Rac5hSgzQca0vhddMsn41o=
+    - secure: DrhogbGmaeNQE3mnPVs8TjIGEA0UtV8Ce0bWu+qvejCGl358EXFyNQyhzzgbWfI6o9RZIO+inHqXiYrNo8sqA0dXvYzhA1ELcnvP6PdEV5tl8BpJ8mbdtauqO831NmjpChYqnbBnARdGadPsGS9p0bbXrQ/9XG0dvFpInGhjF+nqoljM6tvBv4tuUIt3Rsz1U5WG7ztT4RZgl2GC8uVi+DBV1XxCQGZmjy32X/uyhPgrq20t96nKm14bIoXwXfg8thE9Y2MwDb6wNVG754Uj46jv4qkUS/QVj+kW8UJqAMt/VtkPRR77HAtWqfShr+6opwe5ItqfIUmlSfZYfV8+RbBkga8LKEsaJMSQVodRjUzqJFUXslfzDZq1LAvgdPLsSkDXuA1dZW4q9iaWMJb7PlFWqz7dZiFynFx6FIztlQSz/mYe0Om2wsHyVbAehZkVKyMl0SdSCvy+yA3A1LbLeLI158XylhG18cJ7gEzgn4BYuCzOCaABTpPOujtAIro+Jp/qFNcjwncKKwOG1TOVDXKPIlULrstJDxzSydpKUkIoMCSbo4pHOqNrE16eDrIJNbHgZjpExt6Kqlm5ZJg4iijnUdUZNvHWSHTqcipo+2wQSJiQENsyVboFaBMT0hHAl7ZoifT/n77Mq5Ntyklevez3hyOf88y2cIKs5Zwhwp8=
+
+language: python
+
+before_install:
+  - openssl aes-256-cbc -K  -iv  -in .coveralls.yml.enc -out .coveralls.yml -d
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+script:
+  - tox -v
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
