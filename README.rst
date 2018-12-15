@@ -78,14 +78,29 @@ format-pipfile
     :alt: Code Climate Test Coverage
 
 .. |version|
+    image:: https://img.shields.io/pypi/v/format-pipfile.svg
+    :target: https://pypi.org/project/format-pipfile
+    :alt: PyPI Package Latest Release
 
 .. |wheel|
+    image:: https://img.shields.io/pypi/wheel/format-pipfile.svg
+    :target: https://pypi.org/project/format-pipfile
+    :alt: PyPI Wheel
 
 .. |supported-versions|
+    image:: https://img.shields.io/pypi/pyversions/format-pipfile.svg
+    :target: https://pypi.org/project/format-pipfile
+    :alt: Supported Python Versions
 
 .. |supported-implementations|
+    image:: https://img.shields.io/pypi/implementation/format-pipfile.svg
+    :target: https://pypi.org/project/format-pipfile
+    :alt: Python Implementation
 
 .. |commits-since|
+    image:: https://img.shields.io/github/commits-since/demosdemon/format-pipfile/v0.0.1.svg
+    :target: https://github.com/demosdemon/format-pipfile/compare/v0.0.1...master
+    :alt: Commits since latest release
 
 .. end-badges
 
