@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os
-import shlex
 import sys
 
 import pytest
+
+try:
+    from shlex import quote
+except ImportError:
+    from pipes import quote  # noqa
 
 
 @pytest.fixture()
@@ -36,7 +40,7 @@ def git_command(delegator, git_directory):
     """A delegator to ``git`` setting the appropriate ``--git-dir``."""
 
     def run(cmd, **kwargs):
-        cmd = "git --git-dir={} {}".format(shlex.quote(git_directory), cmd)
+        cmd = "git --git-dir={} {}".format(quote(git_directory), cmd)
         return delegator(cmd, **kwargs)
 
     return run
