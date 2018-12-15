@@ -4,5 +4,6 @@ future
 packaging
 path.py
 requirementslib
+six
 tomlkit
 typing ; python_version < '3.6'

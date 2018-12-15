@@ -10,6 +10,7 @@
 "packaging" = "*"
 "path.py" = "*"
 "requirementslib" = "*"
+"six" = "*"
 "tomlkit" = "*"
 "typing" = {markers = "python_version < '3.6'",version = "*"}
 
@@ -25,6 +26,9 @@
 "ipdb" = "*"
 "ipython" = "*"
 "isort" = "*"
+"Jinja2" = "*"
+"matrix" = "*"
+"modernize" = "*"
 "pytest" = "*"
 "pytest-clarity" = "*"
 "pytest-click" = "*"

@@ -37,6 +37,7 @@ clean:
 	git clean -xdf -e .env -e .venv
 
 format: format-pipfile $(PYTHON)
+	$(VIRTUAL_ENV)/bin/python-modernize --nobackup --write $(python_code)
 	$(PYTHON) -m isort --recursive $(python_code)
 	$(PYTHON) -m black $(python_code)
 

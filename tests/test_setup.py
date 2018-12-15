@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
+
 import itertools
 import operator
 import textwrap
@@ -7,6 +9,7 @@ import textwrap
 import packaging.version
 import path
 import pytest
+from six.moves import map
 
 PARDIR = path.Path(__file__).dirname().dirname()
 
@@ -37,7 +40,7 @@ def last(iterable, default=None):
 
 
 def accumulate(changelog):
-    tags = map(operator.itemgetter(1), changelog)
+    tags = list(map(operator.itemgetter(1), changelog))
     return last(_accumulate(tags, set.__or__))
 
 
