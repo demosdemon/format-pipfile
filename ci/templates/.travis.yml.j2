@@ -29,15 +29,10 @@ before_install:
   - lsb_release -a
 
 install:
-  - pip install -U tox pbr
-  - virtualenv --version
-  - easy_install --version
-  - pip --version
-  - tox --version
   - |
     set -ex
-    if [[ $TRAVIS_PYTHON_VERSION == pypy ]]; then
-      (cd "$HOME"
+    if [[ $TRAVIS_PYTHON_VERSION == 'pypy' ]]; then
+      (cd $HOME
        wget https://bitbucket.org/pypy/pypy/downloads/pypy2-v6.0.0-linux64.tar.bz2
        tar xf pypy2-*.tar.bz2
        pypy2-*/bin/pypy -m ensurepip
@@ -45,8 +40,8 @@ install:
       export PATH=$(echo $HOME/pypy2-*/bin):$PATH
       export TOXPYTHON=$(echo $HOME/pypy2-*/bin/pypy)
     fi
-    if [[ $TRAVIS_PYTHON_VERSION == pypy3 ]]; then
-      (cd "$HOME"
+    if [[ $TRAVIS_PYTHON_VERSION == 'pypy3' ]]; then
+      (cd $HOME
        wget https://bitbucket.org/pypy/pypy/downloads/pypy3-v6.0.0-linux64.tar.bz2
        tar xf pypy3-*.tar.bz2
        pypy3-*/bin/pypy3 -m ensurepip
@@ -55,6 +50,11 @@ install:
       export TOXPYTHON=$(echo $HOME/pypy3-*/bin/pypy3)
     fi
     set +x
+  - pip install -U tox pbr
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - tox --version
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

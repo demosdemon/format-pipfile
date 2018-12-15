@@ -21,7 +21,6 @@ commands =
     {posargs:pytest --cov --cov-report=term-missing -vv}
 
 [testenv:check]
-basepython = {env:TOXPYTHON:python3.6}
 deps =
     bandit
     black
