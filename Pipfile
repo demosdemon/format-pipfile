@@ -5,6 +5,7 @@
 
 [packages]
 "click" = "*"
+"delegator-py" = "*"
 "future" = "*"
 "packaging" = "*"
 "path.py" = "*"
@@ -20,7 +21,7 @@
 "flake8-bugbear" = "*"
 "flake8-builtins" = "*"
 "flake8-comprehensions" = "*"
-"format_pipfile" = {editable = true,path = "."}
+"format-pipfile" = {editable = true,path = "."}
 "ipdb" = "*"
 "ipython" = "*"
 "isort" = "*"
