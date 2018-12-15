@@ -40,7 +40,7 @@ before_install:
   - lsb_release -a
 
 install:
-  - pip install -U tox
+  - pip install -U tox pbr
   - virtualenv --version
   - easy_install --version
   - pip --version

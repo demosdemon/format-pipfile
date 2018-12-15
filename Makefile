@@ -7,7 +7,7 @@ VIRTUAL_ENV := $(CURDIR)/.venv
 endif
 
 PYTHON ?= $(VIRTUAL_ENV)/bin/python
-python_code := format_pipfile ci
+python_code := format_pipfile ci tests
 
 help:
 	@echo 'Usage: make <target>'
