@@ -26,7 +26,6 @@
 "pytest-clarity" = "*"
 "pytest-click" = "*"
 "pytest-cov" = "*"
-"pytest-flask" = "*"
 "sphinx" = "*"
 
 [pipenv]

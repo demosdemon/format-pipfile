@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "446799980ae8ec8fed1ec569aca75b1286976bfe3c9ab66c513a52b9eca58615"
+            "sha256": "76efa717d716244a262bf1a8d033c71f837b6e143df78f4f042bc413f3f3753b"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -410,13 +410,6 @@
             "index": "pypi",
             "version": "==1.4.1"
         },
-        "flask": {
-            "hashes": [
-                "sha256:2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48",
-                "sha256:a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05"
-            ],
-            "version": "==1.0.2"
-        },
         "format-pipfile": {
             "editable": true,
             "path": "."
@@ -479,13 +472,6 @@
             ],
             "index": "pypi",
             "version": "==4.3.4"
-        },
-        "itsdangerous": {
-            "hashes": [
-                "sha256:321b033d07f2a4136d3ec762eac9f16a10ccd60f53c0c91af90217ace7ba1f19",
-                "sha256:b12271b2047cb23eeb98c8b5622e2e5c5e9abd9784a153e9d8ef9cb4dd09d749"
-            ],
-            "version": "==1.1.0"
         },
         "jedi": {
             "hashes": [
@@ -696,14 +682,6 @@
             "index": "pypi",
             "version": "==2.6.0"
         },
-        "pytest-flask": {
-            "hashes": [
-                "sha256:df69f2b552098227d7b7a8a48d6df2742a4d865d0807eac4916fb622c2d47e1a",
-                "sha256:e9b120d23f73e0495d8fa1bc3b580b18cc9f98b8d6808bc45fdbcbab7d718242"
-            ],
-            "index": "pypi",
-            "version": "==0.14.0"
-        },
         "pytoml": {
             "hashes": [
                 "sha256:ca2d0cb127c938b8b76a9a0d0f855cf930c1d50cc3a0af6d3595b566519a1013"
@@ -836,13 +814,6 @@
                 "sha256:f4ebe71925af7b40a864553f761ed559b43544f8f71746c2d756c7fe788ade7c"
             ],
             "version": "==0.1.7"
-        },
-        "werkzeug": {
-            "hashes": [
-                "sha256:c3fd7a7d41976d9f44db327260e263132466836cef6f91512889ed60ad26557c",
-                "sha256:d5da73735293558eb1651ee2fddc4d0dedcfa06538b8813a2e20011583c9e49b"
-            ],
-            "version": "==0.14.1"
         },
         "wheel": {
             "hashes": [
