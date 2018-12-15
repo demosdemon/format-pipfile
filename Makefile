@@ -51,6 +51,6 @@ sync $(PYTHON): Pipfile.lock
 	@touch $(PYTHON)
 
 test: $(PYTHON)
-	$(PYTHON) -m pytest $(python_code)
+	$(PYTHON) -m pytest
 
 .PHONY: all clean debug-make format help lock sync test
