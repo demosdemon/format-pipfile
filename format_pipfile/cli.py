@@ -5,7 +5,6 @@ This script performs two tasks:
  * It updates the ``requirements.txt`` file with the packages found in the ``Pipfile``.
  * It reformats the ``Pipfile`` to my opinionated standards.
 """
-from __future__ import annotations
 
 import difflib
 import os

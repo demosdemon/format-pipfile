@@ -8,6 +8,7 @@
 "packaging" = "*"
 "requirementslib" = "*"
 "tomlkit" = "*"
+"typing" = {markers = "python_version < '3.6'",version = "*"}
 
 [dev-packages]
 "bandit" = "*"
