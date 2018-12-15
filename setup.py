@@ -3,4 +3,9 @@
 
 from setuptools import setup
 
-setup(setup_requires=["pbr"], pbr=True)
+setup(
+    setup_requires=[
+        "git+https://github.com/demosdemon/pbr.git@resolve-valueerror#egg=pbr"
+    ],
+    pbr=True,
+)
