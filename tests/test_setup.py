@@ -133,6 +133,7 @@ def current_pbr_version(git_command):
             Programming Language :: Python :: 3.6
             Programming Language :: Python :: 3.7
             Programming Language :: Python :: Implementation :: CPython
+            Programming Language :: Python :: Implementation :: PyPy
             Topic :: Software Development
             """,
         ),
