@@ -15,7 +15,7 @@ format-pipfile
         | |scrutinizer| |code-intelligence| |codacy| |codeclimate|
     * - package
       - | |version| |wheel| |supported-versions| |supported-implementations|
-      - | |commits-since|
+        | |commits-since|
 
 .. |docs|
     image:: https://readthedocs.org/projects/format-pipfile/badge/?version=latest
