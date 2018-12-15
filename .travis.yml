@@ -1,12 +1,70 @@
+language: python
+sudo: false
+cache: pip
+
 env:
   global:
+    - LD_PRELOAD=/lib/x86_64-linux-gnu/libSegFault.so
+    - SEGFAULT_SIGNALS=all
     - secure: tgnbMSjWL5Vi1LNWjGdkEPk16ewjxyot9r56nfttYsSW/ochziSgST8IbTj9dn/iz9PoNGEdzJvi3Cm+8LtaHoktVKuP1ndUDGGA5RIMfGjZQl4XC3GYxpakbJ0frHK/Aof1sILf9pR0ysF5wJ8Mdf98P1wLDKMP7Yti0+50dYsO+RY7Oxq1lL2vbDJwkPLYx0pELoRY4TqfdzCXiVjEB0Y4iSg/SxAirFj4A7DbFTi+ySj8K8nQiiXpOINrx0knmQIQr3zP8DS6dwMoWfQIFTyXW9URPaGI5iqAPfZF/7jWvT1IvLtoLXoUlfBNxce8WTZM7f6zgBq3LGAEiTSCNHg9wtdiEzXog0V2sXQb340kCisFK8bOHrwbYnG+zPjNe3ql992v1bNwl2esNIPleF20lh+3vmT/6zdRz/wYYeF4JlutTvNnZrIpY9DWHfjDU5H8lBrEcYvb1OJvpHOg4GbDvpZUB0T3CgmDnHTHM4XOKCOqrw2Qfh43TrTkADk/UUM4RwgMvbevB0/7b/qK9oZFrZ3KsCAS6XHKMeHxoq1woxHRbc5TkjaUAk1heaFRaHTdB90jTmQG+xZE5wddi7dU4N8Wh+EoXwvB/7tblA1EJ6Pn+0trU0df2VTX6uPDbiGzY2oDds9e0ZBC/VRE4Rac5hSgzQca0vhddMsn41o=
     - secure: DrhogbGmaeNQE3mnPVs8TjIGEA0UtV8Ce0bWu+qvejCGl358EXFyNQyhzzgbWfI6o9RZIO+inHqXiYrNo8sqA0dXvYzhA1ELcnvP6PdEV5tl8BpJ8mbdtauqO831NmjpChYqnbBnARdGadPsGS9p0bbXrQ/9XG0dvFpInGhjF+nqoljM6tvBv4tuUIt3Rsz1U5WG7ztT4RZgl2GC8uVi+DBV1XxCQGZmjy32X/uyhPgrq20t96nKm14bIoXwXfg8thE9Y2MwDb6wNVG754Uj46jv4qkUS/QVj+kW8UJqAMt/VtkPRR77HAtWqfShr+6opwe5ItqfIUmlSfZYfV8+RbBkga8LKEsaJMSQVodRjUzqJFUXslfzDZq1LAvgdPLsSkDXuA1dZW4q9iaWMJb7PlFWqz7dZiFynFx6FIztlQSz/mYe0Om2wsHyVbAehZkVKyMl0SdSCvy+yA3A1LbLeLI158XylhG18cJ7gEzgn4BYuCzOCaABTpPOujtAIro+Jp/qFNcjwncKKwOG1TOVDXKPIlULrstJDxzSydpKUkIoMCSbo4pHOqNrE16eDrIJNbHgZjpExt6Kqlm5ZJg4iijnUdUZNvHWSHTqcipo+2wQSJiQENsyVboFaBMT0hHAl7ZoifT/n77Mq5Ntyklevez3hyOf88y2cIKs5Zwhwp8=
+  matrix:
+    - TOXENV=check
+    - TOXENV=docs
 
-language: python
+matrix:
+  include:
+    - python: '2.7'
+      env:
+        - TOXENV=py27,report,coveralls,codecov,ocular
+    - python: '3.4'
+      env:
+        - TOXENV=py34,report,coveralls,codecov,ocular
+    - python: '3.5'
+      env:
+        - TOXENV=py35,report,coveralls,codecov,ocular
+    - python: '3.6'
+      env:
+        - TOXENV=py36,report,coveralls,codecov,ocular
+    - python: '3.7'
+      dist: xenial
+      sudo: required
+      env:
+        - TOXENV=py37,report,coveralls,codecov,ocular
 
 before_install:
-  - openssl aes-256-cbc -K  -iv  -in .coveralls.yml.enc -out .coveralls.yml -d
+  - openssl aes-256-cbc -K $encrypted_b4b5108e57ea_key -iv $encrypted_b4b5108e57ea_iv -in .coveralls.yml.enc -out .coveralls.yml -d
+  - python --version
+  - uname -a
+  - lsb_release -a
+
+install:
+  - pip install -U tox
+  - virtualenv --version
+  - easy_install --version
+  - pip --version
+  - tox --version
+  - |
+    set -ex
+    if [[ $TRAVIS_PYTHON_VERSION == pypy ]]; then
+      (cd "$HOME"
+       wget https://bitbucket.org/pypy/pypy/downloads/pypy2-v6.0.0-linux64.tar.bz2
+       tar xf pypy2-*.tar.bz2
+       pypy2-*/bin/pypy -m ensurepip
+       pypy2-*/bin/pypy -m pip install -U virtualenv)
+      export PATH=$(echo $HOME/pypy2-*/bin):$PATH
+      export TOXPYTHON=$(echo $HOME/pypy2-*/bin/pypy)
+    fi
+    if [[ $TRAVIS_PYTHON_VERSION == pypy3 ]]; then
+      (cd "$HOME"
+       wget https://bitbucket.org/pypy/pypy/downloads/pypy3-v6.0.0-linux64.tar.bz2
+       tar xf pypy3-*.tar.bz2
+       pypy3-*/bin/pypy3 -m ensurepip
+       pypy3-*/bin/pypy3 -m pip install -U virtualenv)
+      export PATH=$(echo $HOME/pypy3-*/bin):$PATH
+      export TOXPYTHON=$(echo $HOME/pypy3-*/bin/pypy3)
+    fi
+    set +x
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -16,5 +74,14 @@ before_script:
 script:
   - tox -v
 
+after_failure:
+  - more .tox/log/* | cat
+  - more .tox/*/log/* | cat
+
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
