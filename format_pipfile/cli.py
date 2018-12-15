@@ -8,6 +8,7 @@ This script performs two tasks:
 
 import difflib
 import os
+from builtins import str
 from itertools import filterfalse, starmap
 from typing import Any, Callable, Hashable, Optional, Tuple, Union  # noqa
 
@@ -166,7 +167,7 @@ def update_requirements(p, pipfile):
     # type: (path.Path, TOMLDocument) -> None
     sources = list(filterfalse(is_default, pipfile.get("source", [])))
     packages = pipfile.get("packages", {})
-    requirements = list(starmap(Requirement.from_pipfile, packages.items()))
+    requirements = list(starmap(Requirement.from_pipfile, list(packages.items())))
     requirements.sort(key=requirement_sort_key)
     lines = [r.as_line(sources) + os.linesep for r in requirements]
 

@@ -5,6 +5,7 @@
 
 [packages]
 "click" = "*"
+"future" = "*"
 "packaging" = "*"
 "path.py" = "*"
 "requirementslib" = "*"
