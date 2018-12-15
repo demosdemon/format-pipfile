@@ -11,7 +11,7 @@ env:
     - secure: DrhogbGmaeNQE3mnPVs8TjIGEA0UtV8Ce0bWu+qvejCGl358EXFyNQyhzzgbWfI6o9RZIO+inHqXiYrNo8sqA0dXvYzhA1ELcnvP6PdEV5tl8BpJ8mbdtauqO831NmjpChYqnbBnARdGadPsGS9p0bbXrQ/9XG0dvFpInGhjF+nqoljM6tvBv4tuUIt3Rsz1U5WG7ztT4RZgl2GC8uVi+DBV1XxCQGZmjy32X/uyhPgrq20t96nKm14bIoXwXfg8thE9Y2MwDb6wNVG754Uj46jv4qkUS/QVj+kW8UJqAMt/VtkPRR77HAtWqfShr+6opwe5ItqfIUmlSfZYfV8+RbBkga8LKEsaJMSQVodRjUzqJFUXslfzDZq1LAvgdPLsSkDXuA1dZW4q9iaWMJb7PlFWqz7dZiFynFx6FIztlQSz/mYe0Om2wsHyVbAehZkVKyMl0SdSCvy+yA3A1LbLeLI158XylhG18cJ7gEzgn4BYuCzOCaABTpPOujtAIro+Jp/qFNcjwncKKwOG1TOVDXKPIlULrstJDxzSydpKUkIoMCSbo4pHOqNrE16eDrIJNbHgZjpExt6Kqlm5ZJg4iijnUdUZNvHWSHTqcipo+2wQSJiQENsyVboFaBMT0hHAl7ZoifT/n77Mq5Ntyklevez3hyOf88y2cIKs5Zwhwp8=
   matrix:
     - TOXENV=check
-    - TOXENV=docs
+#    - TOXENV=docs
 
 matrix:
   include:
