@@ -1,0 +1,5 @@
+git+https://github.com/demosdemon/pbr.git@resolve-valueerror#egg=pbr
+click
+packaging
+requirementslib
+tomlkit
