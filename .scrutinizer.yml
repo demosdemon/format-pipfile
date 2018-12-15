@@ -5,6 +5,9 @@ checks:
     classes_valid_slots: true
 
 build:
+  environment:
+    variables:
+      TOXENV: py34,report
   nodes:
     analysis:
       project_setup:
@@ -13,8 +16,6 @@ build:
       tests:
         override:
           - py-scrutinizer-run
-          - command: pylint-run
-            use_website_config: true
     tests: true
 filter:
   excluded_paths:
