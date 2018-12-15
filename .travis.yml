@@ -80,7 +80,7 @@ after_failure:
   - more .tox/*/log/* | cat
 
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true
 
 deploy:
   provider: pypi
