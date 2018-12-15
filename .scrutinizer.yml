@@ -6,8 +6,9 @@ checks:
 
 build:
   environment:
+    python: 3.6
     variables:
-      TOXENV: py34,report
+      TOXENV: py36,report
   nodes:
     analysis:
       project_setup:
