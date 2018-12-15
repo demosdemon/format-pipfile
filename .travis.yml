@@ -19,50 +19,27 @@ matrix:
         - TOXENV=check
     - python: "2.7"
       env:
-        - TOXENV=py27-cover,report,coveralls,codecov,ocular
-    - python: "2.7"
-      env:
-        - TOXENV=py27-nocov
+        - TOXENV=py27,report,coveralls,codecov,ocular
     - python: "3.4"
       env:
-        - TOXENV=py34-cover,report,coveralls,codecov,ocular
-    - python: "3.4"
-      env:
-        - TOXENV=py34-nocov
+        - TOXENV=py34,report,coveralls,codecov,ocular
     - python: "3.5"
       env:
-        - TOXENV=py35-cover,report,coveralls,codecov,ocular
-    - python: "3.5"
-      env:
-        - TOXENV=py35-nocov
+        - TOXENV=py35,report,coveralls,codecov,ocular
     - python: "3.6"
       env:
-        - TOXENV=py36-cover,report,coveralls,codecov,ocular
-    - python: "3.6"
-      env:
-        - TOXENV=py36-nocov
+        - TOXENV=py36,report,coveralls,codecov,ocular
     - python: "3.7"
       dist: xenial
       sudo: required
       env:
-        - TOXENV=py37-cover,report,coveralls,codecov,ocular
-    - python: "3.7"
-      dist: xenial
-      sudo: required
-      env:
-        - TOXENV=py37-nocov
+        - TOXENV=py37,report,coveralls,codecov,ocular
     - python: "pypy"
       env:
-        - TOXENV=pypy-cover,report,coveralls,codecov,ocular
-    - python: "pypy"
-      env:
-        - TOXENV=pypy-nocov
+        - TOXENV=pypy,report,coveralls,codecov,ocular
     - python: "pypy3"
       env:
-        - TOXENV=pypy3-cover,report,coveralls,codecov,ocular
-    - python: "pypy3"
-      env:
-        - TOXENV=pypy3-nocov
+        - TOXENV=pypy3,report,coveralls,codecov,ocular
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_b4b5108e57ea_key -iv $encrypted_b4b5108e57ea_iv -in .coveralls.yml.enc -out .coveralls.yml -d
