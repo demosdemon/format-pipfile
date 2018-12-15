@@ -6,7 +6,7 @@ checks:
 
 build:
   environment:
-    python: 3.7
+    python: 3.6
   nodes:
     analysis:
       project_setup:
@@ -18,7 +18,7 @@ build:
     tests:
       tests:
         override:
-          - tox -e py37,report
+          - tox -e py36,report
 filter:
   excluded_paths:
     - "*/test/*"
