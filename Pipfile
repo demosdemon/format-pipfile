@@ -6,7 +6,6 @@
 [packages]
 "click" = "*"
 "packaging" = "*"
-"pbr" = {git = "https://github.com/demosdemon/pbr.git",ref = "resolve-valueerror"}
 "requirementslib" = "*"
 "tomlkit" = "*"
 

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "76efa717d716244a262bf1a8d033c71f837b6e143df78f4f042bc413f3f3753b"
+            "sha256": "d8326908d16b6a5349620652a3ac8d176acab43fc59641204bebe1a44bd9e512"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -96,10 +96,6 @@
             ],
             "index": "pypi",
             "version": "==18.0"
-        },
-        "pbr": {
-            "git": "https://github.com/demosdemon/pbr.git",
-            "ref": "b3dca4020287a61fd44ce84f91b65a8392129621"
         },
         "pep517": {
             "hashes": [
@@ -551,8 +547,11 @@
             "version": "==0.3.1"
         },
         "pbr": {
-            "git": "https://github.com/demosdemon/pbr.git",
-            "ref": "b3dca4020287a61fd44ce84f91b65a8392129621"
+            "hashes": [
+                "sha256:f59d71442f9ece3dffc17bc36575768e1ee9967756e6b6535f0ee1f0054c3d68",
+                "sha256:f6d5b23f226a2ba58e14e49aa3b1bfaf814d0199144b95d78458212444de1387"
+            ],
+            "version": "==5.1.1"
         },
         "pep517": {
             "hashes": [
