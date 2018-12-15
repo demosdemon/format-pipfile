@@ -41,7 +41,6 @@ before_install:
 
 install:
   - pip install -U tox
-  - pip install 'git+https://github.com/demosdemon/pbr.git@resolve-valueerror#egg=pbr'
   - virtualenv --version
   - easy_install --version
   - pip --version
