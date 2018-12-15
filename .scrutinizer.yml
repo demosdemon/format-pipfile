@@ -16,8 +16,9 @@ build:
         override:
           - py-scrutinizer-run
     tests:
-      override:
-        - tox -e py37,report
+      tests:
+        override:
+          - tox -e py37,report
 filter:
   excluded_paths:
     - "*/test/*"
