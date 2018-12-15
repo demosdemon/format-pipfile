@@ -89,6 +89,9 @@ deploy:
   skip_existing: true
   password:
     secure: a8zQ39p3ulPLFa8pi/7bFQD0vkXLYTjiwwma1LKINPj6r4wlxzkDaqMVPpToWlj/sJaj3pDTcoO7A5kZNWD9qnlk8kTWeLLwo6/9m30CUe2SBw09lIsZYlEhXbAu8H7hXGu4DyGtBvCBhlYuPzDi87mCloO9Bfy/IUeNk5+XyVVLLFy33hhrPQR4A+xoF9a3zg8tAlEMNNbu9KM4dIiGZYVrsuGs2ctw1/P+BJT2epzZzZvJFmxPmji/kJKNxApHIgzI6DW533QbE3xbwOYs7Y9TCXjwIvTj+NTLpjLHoWFIqIiurGGqLunWozCr9s6LEsxgnhRzaZ1EvGQC3qUt3WL8oeuusn6LieL5+MhdqkvqcjI+Tjr76wSz1dUryKXvW0b3NhIoOsC5bZiEae8mJ67QJYCUIS8ce3xT+X2j8Vi0zQ09e4+VpYYO4Ru6T6ICTedPVnldAU+38NSvReh2YUjt3/TsdHSBFRgq5f3zpBD+YCHkMdzhIk/6QdCo1BqVkrhFkKqR3v8nYOvcz0ddvOMln4TOSAAaNtUgrLgCJ78ZxsnOehP5BeGdLB7xuRP/b8dUP4a6pmxrEfKvKYGPshigizmosREeOMDwIGOnkL2ZXP13WG4RGlGHqyweEzffgc2+0Neg0eqtE/0alL8ZSI4mb4VS+6Fu0BL8q0syaKk=
+  on:
+    tags: true
+    branch: master
 
 notifications:
   email:
