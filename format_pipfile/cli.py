@@ -12,6 +12,7 @@ from itertools import filterfalse, starmap
 from typing import Any, Callable, Hashable, Optional, Tuple, Union  # noqa
 
 import click
+import path
 from packaging.utils import canonicalize_name
 from requirementslib import Requirement
 from tomlkit import loads
@@ -19,7 +20,6 @@ from tomlkit.container import Container
 from tomlkit.items import AoT, Key, KeyType, Table, Trivia
 from tomlkit.toml_document import TOMLDocument  # noqa
 
-PathLike = Union[bytes, str, os.PathLike]
 MaybeKey = Union[str, Key]
 ContainerItem = Tuple[MaybeKey, Any]
 SortKeyFunc = Callable[[ContainerItem], Hashable]
@@ -117,12 +117,12 @@ def is_default(source):
     return all(source.get(k) == v for (k, v) in DEFAULT_SOURCE)
 
 
-def load_pipfile(path=None):
-    # type: (PathLike) -> TOMLDocument
-    if path is None:
-        path = ROOT_PIPFILE
+def load_pipfile(p=None):
+    # type: (Optional[path.Path]) -> TOMLDocument
+    if p is None:
+        p = path.Path(ROOT_PIPFILE)
 
-    with open(path, "r") as fp:
+    with open(p, "r") as fp:
         doc = loads(fp.read())
     doc._parsed = True
 
@@ -162,25 +162,25 @@ def load_pipfile(path=None):
     return doc
 
 
-def update_requirements(path, pipfile):
-    # type: (PathLike, TOMLDocument) -> None
+def update_requirements(p, pipfile):
+    # type: (path.Path, TOMLDocument) -> None
     sources = list(filterfalse(is_default, pipfile.get("source", [])))
     packages = pipfile.get("packages", {})
     requirements = list(starmap(Requirement.from_pipfile, packages.items()))
     requirements.sort(key=requirement_sort_key)
     lines = [r.as_line(sources) + os.linesep for r in requirements]
 
-    with open(path, "w") as fp:
+    with open(p, "w") as fp:
         fp.writelines(lines)
 
 
-def dump_pipfile(path, pipfile):
-    # type: (PathLike, TOMLDocument) -> None
+def dump_pipfile(p, pipfile):
+    # type: (path.Path, TOMLDocument) -> None
     reorder_container(pipfile, pipfile_section_key, key_type=KeyType.Bare)
 
     for name in ("packages", "dev-packages"):
         try:
-            section = pipfile.item(name)
+            section = pipfile.item(name)  # type: Table
         except KeyError:
             pass
         else:
@@ -189,16 +189,16 @@ def dump_pipfile(path, pipfile):
 
     value = pipfile.as_string()
     try:
-        with open(path, "r") as fp:
+        with open(p, "r") as fp:
             old_value = fp.read()
     except OSError:
         old_value = ""
 
     if value != old_value:
         diff = difflib.ndiff(old_value.splitlines(True), value.splitlines(True))
-        print("".join(diff), end="")
+        click.echo("".join(diff), nl=False)
 
-        with open(path, "w") as fp:
+        with open(p, "w") as fp:
             fp.write(value)
 
 
@@ -236,13 +236,15 @@ def dump_pipfile(path, pipfile):
 def main(requirements_file, skip_requirements_file, pipfile, skip_pipfile):
     # type: (str, bool, str, bool) -> None
     """Update the requirements.txt file and reformat the Pipfile."""
-    pf = load_pipfile(pipfile)
+    pipfile_path = path.Path(pipfile)
+    pf = load_pipfile(pipfile_path)
 
     if not skip_requirements_file:
-        update_requirements(requirements_file, pf)
+        requirements_file_path = path.Path(requirements_file)
+        update_requirements(requirements_file_path, pf)
 
     if not skip_pipfile:
-        dump_pipfile(pipfile, pf)
+        dump_pipfile(pipfile_path, pf)
 
 
 if __name__ == "__main__":

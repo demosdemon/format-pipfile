@@ -6,6 +6,7 @@
 [packages]
 "click" = "*"
 "packaging" = "*"
+"path.py" = "*"
 "requirementslib" = "*"
 "tomlkit" = "*"
 "typing" = {markers = "python_version < '3.6'",version = "*"}

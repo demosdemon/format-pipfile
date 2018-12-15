@@ -1,5 +1,6 @@
 click
 packaging
+path.py
 requirementslib
 tomlkit
 typing ; python_version < '3.6'
