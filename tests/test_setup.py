@@ -10,6 +10,21 @@ import pytest
 
 PARDIR = path.Path(__file__).dirname().dirname()
 
+try:
+    _accumulate = itertools.accumulate
+except AttributeError:
+
+    def _accumulate(iterable, func=operator.add):
+        it = iter(iterable)
+        try:
+            total = next(it)
+        except StopIteration:
+            return
+        yield total
+        for element in it:
+            total = func(total, element)
+            yield total
+
 
 def last(iterable, default=None):
     it = iter(iterable)
@@ -23,7 +38,7 @@ def last(iterable, default=None):
 
 def accumulate(changelog):
     tags = map(operator.itemgetter(1), changelog)
-    return last(itertools.accumulate(tags, set.__or__))
+    return last(_accumulate(tags, set.__or__))
 
 
 @pytest.fixture()
