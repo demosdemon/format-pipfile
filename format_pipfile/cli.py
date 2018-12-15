@@ -9,7 +9,7 @@ This script performs two tasks:
 import difflib
 import os
 from itertools import filterfalse, starmap
-from typing import Any, Callable, Hashable, Tuple, Union
+from typing import Any, Callable, Hashable, Optional, Tuple, Union  # noqa
 
 import click
 from packaging.utils import canonicalize_name
@@ -17,11 +17,12 @@ from requirementslib import Requirement
 from tomlkit import loads
 from tomlkit.container import Container
 from tomlkit.items import AoT, Key, KeyType, Table, Trivia
-from tomlkit.toml_document import TOMLDocument
+from tomlkit.toml_document import TOMLDocument  # noqa
 
 PathLike = Union[bytes, str, os.PathLike]
 MaybeKey = Union[str, Key]
 ContainerItem = Tuple[MaybeKey, Any]
+SortKeyFunc = Callable[[ContainerItem], Hashable]
 
 ROOT_PATH = os.path.normpath(os.path.join(os.path.dirname(__file__), os.pardir))
 ROOT_REQUIREMENTS = os.path.join(ROOT_PATH, "requirements.txt")
@@ -34,20 +35,17 @@ DEFAULT_SOURCE = (
 )
 
 
-def unwrap_key(key: MaybeKey) -> str:
+def unwrap_key(key):
+    # type: (MaybeKey) -> str
     if isinstance(key, Key):
         return key.key
 
     return key
 
 
-def reorder_container(
-    container: Container,
-    sort_key: Callable[[ContainerItem], Hashable] = None,
-    reverse: bool = False,
-    key_type: KeyType = None,
-) -> None:
-    items = container._body
+def reorder_container(container, sort_key=None, reverse=False, key_type=None):
+    # type: (Container, SortKeyFunc, bool, KeyType) -> None
+    items = container.body
     if sort_key is not None or reverse:
         items.sort(key=sort_key, reverse=reverse)
 
@@ -61,12 +59,13 @@ def reorder_container(
             if key_type is not None:
                 key = Key(key.key, key_type)
         else:
-            key = Key(key, key_type)
+            key = Key(str(key), key_type)
 
         container.append(key, value)
 
 
 def pipfile_source_key(pair):
+    # type: (ContainerItem) -> Tuple[int, Optional[str]]
     not_found = len(DEFAULT_SOURCE)
 
     key, value = pair
@@ -83,6 +82,7 @@ def pipfile_source_key(pair):
 
 
 def pipfile_section_key(pair):
+    # type: (ContainerItem) -> Tuple[int, Optional[str], Optional[str]]
     not_found = len(PIPFILE_SECTIONS)
 
     key, value = pair
@@ -101,20 +101,24 @@ def pipfile_section_key(pair):
 
 
 def pipfile_packages_key(pair):
+    # type: (ContainerItem) -> Tuple[bool, Optional[str]]
     key, value = pair
     key = unwrap_key(key)
     return (key is None, canonicalize_name(key) if key else None)
 
 
-def requirement_sort_key(item: Requirement) -> Hashable:
+def requirement_sort_key(item):
+    # type: (Requirement) -> Tuple[bool, Optional[str]]
     return (item.is_named, item.normalized_name)
 
 
 def is_default(source):
+    # type: (Table) -> bool
     return all(source.get(k) == v for (k, v) in DEFAULT_SOURCE)
 
 
-def load_pipfile(path: PathLike = None) -> TOMLDocument:
+def load_pipfile(path=None):
+    # type: (PathLike) -> TOMLDocument
     if path is None:
         path = ROOT_PIPFILE
 
@@ -126,7 +130,7 @@ def load_pipfile(path: PathLike = None) -> TOMLDocument:
     have_default = False
     for key in ("source", "sources"):
         try:
-            item = doc.item(key)
+            item = doc.item(key)  # type: Union[AoT, Table]
         except KeyError:
             continue
 
@@ -158,7 +162,8 @@ def load_pipfile(path: PathLike = None) -> TOMLDocument:
     return doc
 
 
-def update_requirements(path: PathLike, pipfile: TOMLDocument) -> None:
+def update_requirements(path, pipfile):
+    # type: (PathLike, TOMLDocument) -> None
     sources = list(filterfalse(is_default, pipfile.get("source", [])))
     packages = pipfile.get("packages", {})
     requirements = list(starmap(Requirement.from_pipfile, packages.items()))
@@ -169,7 +174,8 @@ def update_requirements(path: PathLike, pipfile: TOMLDocument) -> None:
         fp.writelines(lines)
 
 
-def dump_pipfile(path: PathLike, pipfile: TOMLDocument) -> None:
+def dump_pipfile(path, pipfile):
+    # type: (PathLike, TOMLDocument) -> None
     reorder_container(pipfile, pipfile_section_key, key_type=KeyType.Bare)
 
     for name in ("packages", "dev-packages"):
@@ -228,6 +234,7 @@ def dump_pipfile(path: PathLike, pipfile: TOMLDocument) -> None:
     show_envvar=True,
 )
 def main(requirements_file, skip_requirements_file, pipfile, skip_pipfile):
+    # type: (str, bool, str, bool) -> None
     """Update the requirements.txt file and reformat the Pipfile."""
     pf = load_pipfile(pipfile)
 
