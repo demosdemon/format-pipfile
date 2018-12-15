@@ -12,7 +12,7 @@ environment:
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "32"
     - TOXENV: check
-      TOXPYTHON: C:\Python36\python.exe
+      TOXPYTHON: C:\Python36-x64\python.exe
       PYTHON_HOME: C:\Python36-x64
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
@@ -22,7 +22,7 @@ environment:
       PYTHON_VERSION: "2.7"
       PYTHON_ARCH: "32"
     - TOXENV: py27,report
-      TOXPYTHON: C:\Python27\python.exe
+      TOXPYTHON: C:\Python27-x64\python.exe
       WINDOWS_SDK_VERSION: v7.0
       PYTHON_HOME: C:\Python27-x64
       PYTHON_VERSION: "2.7"
@@ -33,7 +33,7 @@ environment:
       PYTHON_VERSION: "3.4"
       PYTHON_ARCH: "32"
     - TOXENV: py34,report
-      TOXPYTHON: C:\Python34\python.exe
+      TOXPYTHON: C:\Python34-x64\python.exe
       WINDOWS_SDK_VERSION: v7.1
       PYTHON_HOME: C:\Python34-x64
       PYTHON_VERSION: "3.4"
@@ -44,7 +44,7 @@ environment:
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "32"
     - TOXENV: py35,report
-      TOXPYTHON: C:\Python35\python.exe
+      TOXPYTHON: C:\Python35-x64\python.exe
       PYTHON_HOME: C:\Python35-x64
       PYTHON_VERSION: "3.5"
       PYTHON_ARCH: "64"
@@ -54,7 +54,7 @@ environment:
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "32"
     - TOXENV: py36,report
-      TOXPYTHON: C:\Python36\python.exe
+      TOXPYTHON: C:\Python36-x64\python.exe
       PYTHON_HOME: C:\Python36-x64
       PYTHON_VERSION: "3.6"
       PYTHON_ARCH: "64"
@@ -64,7 +64,7 @@ environment:
       PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "32"
     - TOXENV: py37,report
-      TOXPYTHON: C:\Python37\python.exe
+      TOXPYTHON: C:\Python37-x64\python.exe
       PYTHON_HOME: C:\Python37-x64
       PYTHON_VERSION: "3.7"
       PYTHON_ARCH: "64"
@@ -79,6 +79,8 @@ install:
   - '%PYTHON_HOME%\Scripts\tox --version'
 test_script:
   - '%WITH_COMPILER% %PYTHON_HOME%\Scripts\tox'
+after_test:
+  - "%WITH_COMPILER% %TOXPYTHON% setup.py bdist_wheel"
 on_failure:
   - ps: dir "env:"
   - ps: get-content .tox\*\log\*
