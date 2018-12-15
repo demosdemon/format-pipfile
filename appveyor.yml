@@ -78,7 +78,7 @@ install:
   - '%PYTHON_HOME%\Scripts\pip --version'
   - '%PYTHON_HOME%\Scripts\tox --version'
 test_script:
-  - '%WITH_COMPILER% %PYTHON_HOME%\Scripts\tox'
+  - '%WITH_COMPILER% %PYTHON_HOME%\Scripts\tox -v'
 after_test:
   - "%WITH_COMPILER% %TOXPYTHON% setup.py bdist_wheel"
 on_failure:
