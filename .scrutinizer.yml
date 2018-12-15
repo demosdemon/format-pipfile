@@ -9,13 +9,13 @@ build:
     python: 3.6
   nodes:
     analysis:
-      project_setup:
-        override:
-          - pip install -U tox
       tests:
         override:
           - py-scrutinizer-run
     tests:
+      project_setup:
+        override:
+          - pip install -U tox setuptools
       tests:
         override:
           - tox -e py36,report
