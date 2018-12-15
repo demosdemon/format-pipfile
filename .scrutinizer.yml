@@ -13,12 +13,9 @@ build:
         override:
           - py-scrutinizer-run
     tests:
-      project_setup:
-        override:
-          - pip install -U tox setuptools
       tests:
         override:
-          - tox -e py36,report
+          - true
 filter:
   excluded_paths:
     - "*/test/*"
