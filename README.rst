@@ -98,8 +98,8 @@ format-pipfile
     :alt: Python Implementation
 
 .. |commits-since|
-    image:: https://img.shields.io/github/commits-since/demosdemon/format-pipfile/v0.0.4.svg
-    :target: https://github.com/demosdemon/format-pipfile/compare/v0.0.4...master
+    image:: https://img.shields.io/github/commits-since/demosdemon/format-pipfile/v0.0.5.svg
+    :target: https://github.com/demosdemon/format-pipfile/compare/v0.0.5...master
     :alt: Commits since latest release
 
 .. end-badges
