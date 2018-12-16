@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+import os
 from textwrap import dedent
 
 import path
@@ -11,6 +12,17 @@ from tomlkit import parse
 from tomlkit.items import Key
 
 ROOT = path.Path(__file__).dirname().dirname()
+
+
+@pytest.mark.skipif("CI" not in os.environ, reason="Only applies on CI environments.")
+def test_cli_ci(delegator):
+    with ROOT:
+        status = delegator("git status --porcelain")
+        assert not status
+        output = delegator("format-pipfile")
+        assert not output
+        status = delegator("git status --porcelain")
+        assert not status
 
 
 def test_cli_help(cli_runner):
