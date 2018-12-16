@@ -72,6 +72,7 @@ init:
   - ps: echo $env:TOXENV
   - ps: ls C:\Python*
 install:
+  - python -m pip install six
   - python -u ci\appveyor-bootstrap.py
   - '%PYTHON_HOME%\Scripts\virtualenv --version'
   - '%PYTHON_HOME%\Scripts\easy_install --version'
