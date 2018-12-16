@@ -37,7 +37,7 @@ def main():
         loader=jinja2.FileSystemLoader(template_path),
         trim_blocks=True,
         lstrip_blocks=True,
-        keep_trailing_newline=True,
+        keep_trailing_newline=False,
     )
 
     environments = load_matrix(base_path)
@@ -45,8 +45,9 @@ def main():
         name = os.path.split(name)[1]
         root = os.path.splitext(name)[0]
         tpl = jinja.get_template(name)
+        contents = tpl.render(environments=environments).strip()
         with open(base_path / root, "w") as fp:
-            fp.write(tpl.render(environments=environments))
+            fp.write(contents + "\n")
 
         print("Wrote {}".format(root))
 

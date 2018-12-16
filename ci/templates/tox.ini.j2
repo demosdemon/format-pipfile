@@ -80,7 +80,7 @@ deps =
 skip_install = true
 commands = coverage erase
 
-{% for env, config in environments|dictsort %}
+{% for env, config in environments|dictsort if env.startswith("py") %}
 [testenv:{{ env }}]
 basepython = {env:TOXPYTHON:{{ config.python if config["python"].startswith("pypy") else "python" + config["python"] }}}
 {% if config.env_vars %}
@@ -104,6 +104,5 @@ deps =
 {% endif %}
 {% for dep in config.deps %}
     {{ dep }}
-{% endfor %}
-
+{% endfor %}{{ "" }}
 {% endfor %}
