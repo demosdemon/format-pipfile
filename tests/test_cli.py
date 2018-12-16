@@ -43,3 +43,27 @@ def test_reorder_container():
 def test_pipfile_source_key(pair, expected):
     res = cli.pipfile_source_key(pair)
     assert res == expected
+
+
+@pytest.mark.parametrize(
+    ("pair", "expected"),
+    [
+        (("source", {}), (0, "source", "source")),
+        (("SOURCE", {}), (0, "source", "SOURCE")),
+        (("packages", {}), (1, "packages", "packages")),
+        (("PACKAGES", {}), (1, "packages", "PACKAGES")),
+        (("dev-packages", {}), (2, "dev-packages", "dev-packages")),
+        (("dev_packages", {}), (2, "dev-packages", "dev_packages")),
+        (("DEV-PACKAGES", {}), (2, "dev-packages", "DEV-PACKAGES")),
+        (("requires", {}), (3, "requires", "requires")),
+        (("REQUIRES", {}), (3, "requires", "REQUIRES")),
+        (("scripts", {}), (4, "scripts", "scripts")),
+        (("SCRIPTS", {}), (4, "scripts", "SCRIPTS")),
+        (("another_key", {}), (5, "another-key", "another_key")),
+        (("ANOTHER KEY", {}), (5, "another key", "ANOTHER KEY")),
+        ((None, {}), (6, None, None)),
+    ],
+)
+def test_pipfile_section_key(pair, expected):
+    res = cli.pipfile_section_key(pair)
+    assert res == expected
