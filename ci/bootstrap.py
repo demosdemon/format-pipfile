@@ -44,6 +44,7 @@ def main():
         trim_blocks=True,
         lstrip_blocks=True,
         keep_trailing_newline=False,
+        extensions=("jinja2.ext.do",),
     )
 
     environments = load_matrix(base_path)

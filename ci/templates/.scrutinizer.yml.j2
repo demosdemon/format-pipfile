@@ -23,7 +23,11 @@ filter:
     - "lib/*"
 tools:
   external_code_coverage:
-    # py27-cover,py34-cover,py35-cover,py36-cover,py37-cover,pypy-cover,pypy3-cover
-    runs: 7
+{% set items = [] %}
+{% for env, config in environments|dictsort if config.cover %}
+{% do items.append(env) %}
+{% endfor %}
+    # {{ items|join(",") }}
+    runs: {{ items|length }}
     # timeout in seconds, default 5 minutes
-    timeout: 630
+    timeout: {{ items|length * 90 }}
