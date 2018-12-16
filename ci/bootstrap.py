@@ -16,13 +16,19 @@ def load_matrix(base_path):
     items.insert(0, ("check", {"coverage_flag": "False"}))
     for alias, conf in items:
         environments[alias] = conf.copy()
-        python = conf.pop("python_version", "py37")
-        python = python if python.startswith("pypy") else "{0[2]}.{0[3]}".format(python)
+        pyenv = conf.pop("python_version", "py37")
+        windows = not pyenv.startswith("pypy")
+        python = pyenv if pyenv.startswith("pypy") else "{0[2]}.{0[3]}".format(pyenv)
         cover = conf.pop("coverage_flag", "true").lower()
         deps = conf.pop("dependencies", "").split()
         env_vars = {k.upper(): v for k, v in list(conf.items())}
         environments[alias].update(
-            python=python, cover=cover == "true", deps=deps, env_vars=env_vars
+            windows=windows,
+            python=python,
+            cover=cover == "true",
+            deps=deps,
+            env_vars=env_vars,
+            pyenv=pyenv,
         )
 
     return environments
