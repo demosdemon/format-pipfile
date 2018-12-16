@@ -1,9 +1,12 @@
+# suppress inspection "DuplicateSectionInFile" for whole file
+
 [tox]
 envlist =
     clean,
-    check,
     # docs,
-    {py27,py34,py35,py36,py37,pypy,pypy3},
+{% for env in environments|sort %}
+    {{ env }},
+{% endfor %}
     report
 
 [testenv]
@@ -12,13 +15,10 @@ setenv =
 passenv =
     *
 deps =
-    pbr
     pytest
     pytest-click
-    pytest-cov
-    pytest-travis-fold
 commands =
-    {posargs:pytest --cov --cov-report=term-missing -vv}
+    {posargs:pytest -vv}
 
 [testenv:check]
 deps =
@@ -79,3 +79,31 @@ deps =
     coverage
 skip_install = true
 commands = coverage erase
+
+{% for env, config in environments|dictsort %}
+[testenv:{{ env }}]
+basepython = {env:TOXPYTHON:{{ config.python if config["python"].startswith("pypy") else "python" + config["python"] }}}
+{% if config.env_vars %}
+setenv =
+    {[testenv]setenv}
+{% endif %}
+{% for var, value in config.env_vars|dictsort %}
+    {{ var }}={{ value }}
+{% endfor %}
+{% if config.cover %}
+usedevelop = true
+commands =
+    {posargs:pytest --cov --cov-report=term-missing -vv}
+{% endif %}
+{% if config.cover or config.deps %}
+deps =
+    {[testenv]deps}
+{% endif %}
+{% if config.cover %}
+    pytest-cov
+{% endif %}
+{% for dep in config.deps %}
+    {{ dep }}
+{% endfor %}
+
+{% endfor %}
