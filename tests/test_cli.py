@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 
 import pytest
+import requirementslib.models.requirements as reqm
 from format_pipfile import cli
 from tomlkit.items import Key
 
@@ -24,10 +25,6 @@ def test_unwrap_key():
     assert cli.unwrap_key(k) == "test"
     assert cli.unwrap_key("test") == "test"
     assert cli.unwrap_key(None) is None
-
-
-def test_reorder_container():
-    pass
 
 
 @pytest.mark.parametrize(
@@ -77,3 +74,21 @@ def test_pipfile_packages_key(pypi_packages):
 
     result = cli.pipfile_packages_key((None, {}))
     assert result == (True, None)
+
+
+@pytest.mark.parametrize(
+    ("req", "expected"),
+    [
+        (reqm.Requirement.from_line("Foo.bar"), (True, "foo-bar")),
+        (reqm.Requirement.from_line("-e .."), (False, "format-pipfile")),
+        (
+            reqm.Requirement.from_line(
+                "git+ssh://git@github.com/demosdemon/format-pipfile.git@master#egg=format-pipfile"
+            ),
+            (False, "format-pipfile"),
+        ),
+    ],
+)
+def test_requirement_sort_key(req, expected):
+    res = cli.requirement_sort_key(req)
+    assert res == expected
