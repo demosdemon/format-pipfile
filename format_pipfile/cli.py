@@ -10,7 +10,6 @@ from __future__ import absolute_import
 
 import difflib
 import os
-from builtins import str
 from itertools import filterfalse, starmap
 from typing import Any, Callable, Hashable, Optional, Tuple, Union  # noqa
 
