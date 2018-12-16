@@ -15,6 +15,7 @@
 "typing" = {markers = "python_version < '3.6'",version = "*"}
 
 [dev-packages]
+"attr" = "*"
 "bandit" = "*"
 "black" = "*"
 "bumpversion" = "*"
