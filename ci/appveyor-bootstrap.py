@@ -9,17 +9,15 @@ with various fixes and improvements that just weren't feasible to implement in
 PowerShell.
 """
 
-from __future__ import print_function
+from __future__ import absolute_import, print_function
 
 from os import environ
 from os.path import exists
 from shlex import shlex
 from subprocess import check_call
 
-try:
-    from urllib.request import urlretrieve
-except ImportError:
-    from urllib import urlretrieve  # noqa
+from six.moves import range
+from six.moves.urllib.request import urlretrieve
 
 
 def shlex_split(string):
@@ -54,14 +52,14 @@ INSTALL_CMD = {
 
 
 def download_file(url, path):
-    print("Downloading: {} (into {})".format(url, path))
+    print(("Downloading: {} (into {})".format(url, path)))
     progress = [0, 0]
 
     def report(count, size, total):
         progress[0] = count * size
         if progress[0] - progress[1] > 1000000:
             progress[1] = progress[0]
-            print("Downloaded {:,}/{:,} ...".format(progress[1], total))
+            print(("Downloaded {:,}/{:,} ...".format(progress[1], total)))
 
     dest, _ = urlretrieve(url, path, reporthook=report)
     return dest
@@ -69,24 +67,28 @@ def download_file(url, path):
 
 def install_python(version, arch, home):
     print(
-        "Installing Python {} for {} bit architecture to {}".format(version, arch, home)
+        (
+            "Installing Python {} for {} bit architecture to {}".format(
+                version, arch, home
+            )
+        )
     )
     if exists(home):
         return
 
     path, extension = download_python(version, arch)
-    print("Installing {} to {}".format(path, home))
+    print(("Installing {} to {}".format(path, home)))
     success = False
     for cmd in INSTALL_CMD[extension]:
         cmd = [part.format(home=home, path=path) for part in cmd]
-        print("Running: {}".format(" ".join(cmd)))
+        print(("Running: {}".format(" ".join(cmd))))
         try:
             check_call(cmd)
         except Exception as exc:
-            print("Failed command '{}' with: {}".format(" ".join(cmd), exc))
+            print(("Failed command '{}' with: {}".format(" ".join(cmd), exc)))
             if exists("install.log"):
                 with open("install.log") as fp:
-                    print(fp.read())
+                    print((fp.read()))
         else:
             success = True
 
@@ -104,7 +106,7 @@ def download_python(version, arch):
         try:
             return download_file(url, path), extension
         except Exception as exc:
-            print("Failed to download: {}".format(exc))
+            print(("Failed to download: {}".format(exc)))
         print("Retrying...")
 
 
@@ -116,7 +118,7 @@ def install_pip(home):
     else:
         print("Installing pip...")
         download_file(GET_PIP_URL, GET_PIP_PATH)
-        print("Executing: {} {}".format(python_path, GET_PIP_PATH))
+        print(("Executing: {} {}".format(python_path, GET_PIP_PATH)))
         check_call([python_path, GET_PIP_PATH])
 
 

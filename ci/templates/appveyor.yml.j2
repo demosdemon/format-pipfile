@@ -1,0 +1,42 @@
+version: "{branch}-{build}"
+build: off
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
+environment:
+  global:
+    WITH_COMPILER: 'cmd /E:ON /V:ON /C .\ci\appveyor-with-compiler.cmd'
+  matrix:
+{% for arch in ("32", "64") %}
+{% for env, config in environments|dictsort if config.windows %}
+    - TOXENV: '{{ env }}{% if config.cover %},report{% endif %}'
+      TOXPYTHON: C:\Python{{ config.pyenv[2:4] }}{% if arch == "64" %}-x64{% endif %}\python.exe
+{% if arch == "64" and env.startswith(("py2", "py34")) %}
+      WINDOWS_SDK_VERSION: v7.{{ '1' if env.startswith('py34') else '0' }}
+{% endif %}
+      PYTHON_HOME: C:\Python{{ config.pyenv[2:4] }}{% if arch == "64" %}-x64{% endif %}{{ "" }}
+      PYTHON_VERSION: '{{ config.python }}'
+      PYTHON_ARCH: '{{ arch }}'
+{% endfor %}{% endfor %}
+init:
+  - ps: echo $env:TOXENV
+  - ps: ls C:\Python*
+install:
+  - python -m pip install six
+  - python -u ci\appveyor-bootstrap.py
+  - '%PYTHON_HOME%\Scripts\virtualenv --version'
+  - '%PYTHON_HOME%\Scripts\easy_install --version'
+  - '%PYTHON_HOME%\Scripts\pip --version'
+  - '%PYTHON_HOME%\Scripts\tox --version'
+test_script:
+  - '%WITH_COMPILER% %PYTHON_HOME%\Scripts\tox -v'
+after_test:
+  - "%WITH_COMPILER% %TOXPYTHON% setup.py bdist_wheel"
+on_failure:
+  - ps: dir "env:"
+  - ps: get-content .tox\*\log\*
+artifacts:
+  - path: dist\*
+
+### To enable remote debugging, uncomment this (also see: http://www.appveyor.com/docs/how-to/rdp-to-build-worker):
+# on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

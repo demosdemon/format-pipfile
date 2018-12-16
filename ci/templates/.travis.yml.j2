@@ -11,57 +11,15 @@ env:
 
 matrix:
   include:
-    - python: "3.7"
+{%- for env, config in environments|dictsort %}{{ "" }}
+    - python: "{{ config.python }}"
+{% if config.python == "3.7" %}
       dist: xenial
       sudo: required
+{% endif %}
       env:
-        - TOXENV=check
-    - python: "2.7"
-      env:
-        - TOXENV=py27-cover,report,coveralls,codecov,ocular
-    - python: "2.7"
-      env:
-        - TOXENV=py27-nocov
-    - python: "3.4"
-      env:
-        - TOXENV=py34-cover,report,coveralls,codecov,ocular
-    - python: "3.4"
-      env:
-        - TOXENV=py34-nocov
-    - python: "3.5"
-      env:
-        - TOXENV=py35-cover,report,coveralls,codecov,ocular
-    - python: "3.5"
-      env:
-        - TOXENV=py35-nocov
-    - python: "3.6"
-      env:
-        - TOXENV=py36-cover,report,coveralls,codecov,ocular
-    - python: "3.6"
-      env:
-        - TOXENV=py36-nocov
-    - python: "3.7"
-      dist: xenial
-      sudo: required
-      env:
-        - TOXENV=py37-cover,report,coveralls,codecov,ocular
-    - python: "3.7"
-      dist: xenial
-      sudo: required
-      env:
-        - TOXENV=py37-nocov
-    - python: "pypy"
-      env:
-        - TOXENV=pypy-cover,report,coveralls,codecov,ocular
-    - python: "pypy"
-      env:
-        - TOXENV=pypy-nocov
-    - python: "pypy3"
-      env:
-        - TOXENV=pypy3-cover,report,coveralls,codecov,ocular
-    - python: "pypy3"
-      env:
-        - TOXENV=pypy3-nocov
+        - TOXENV={{ env }}{% if config.cover %},report,coveralls,codecov,ocular{% endif %}
+{%- endfor -%}{{ "" }}
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_b4b5108e57ea_key -iv $encrypted_b4b5108e57ea_iv -in .coveralls.yml.enc -out .coveralls.yml -d

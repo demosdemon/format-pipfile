@@ -1,0 +1,108 @@
+# suppress inspection "DuplicateSectionInFile" for whole file
+
+[tox]
+envlist =
+    clean,
+    # docs,
+{% for env in environments|sort %}
+    {{ env }},
+{% endfor %}
+    report
+
+[testenv]
+setenv =
+    PYTHONUNBUFFERED=yes
+passenv =
+    *
+deps =
+    pytest
+    pytest-click
+commands =
+    {posargs:pytest -vv}
+
+[testenv:check]
+deps =
+    bandit
+    black
+    flake8
+    flake8-bugbear
+    flake8-builtins
+    flake8-comprehensions
+    isort
+skip_install = true
+commands =
+    bandit --recursive --aggregate file --verbose setup.py format_pipfile
+    flake8 setup.py format_pipfile
+    black --verbose --check --diff setup.py format_pipfile
+    isort --verbose --check-only --diff --recursive setup.py format_pipfile
+
+[testenv:docs]
+deps =
+    -r{toxinidir}/docs/requirements.txt
+commands =
+    sphinx-build {posargs:-E} -b doctest docs dist/docs
+    sphinx-build {posargs:-E} -b html docs dist/docs
+    sphinx-build -b linkcheck docs dist/docs
+
+[testenv:coveralls]
+deps =
+    coveralls
+skip_install = true
+commands =
+    coveralls
+
+[testenv:codecov]
+deps =
+    codecov
+skip_install = true
+commands =
+    coverage xml --ignore-errors
+    codecov []
+
+[testenv:ocular]
+deps =
+    scrutinizer-ocular
+skip_install = true
+commands =
+    ocular
+
+[testenv:report]
+deps =
+    coverage
+skip_install = true
+commands =
+    coverage report
+    coverage html
+
+[testenv:clean]
+deps =
+    coverage
+skip_install = true
+commands = coverage erase
+
+{% for env, config in environments|dictsort if env.startswith("py") %}
+[testenv:{{ env }}]
+basepython = {env:TOXPYTHON:{{ config.python if config["python"].startswith("pypy") else "python" + config["python"] }}}
+{% if config.env_vars %}
+setenv =
+    {[testenv]setenv}
+{% endif %}
+{% for var, value in config.env_vars|dictsort %}
+    {{ var }}={{ value }}
+{% endfor %}
+{% if config.cover %}
+usedevelop = true
+commands =
+    {posargs:pytest --cov --cov-report=term-missing -vv}
+{% endif %}
+{% if config.cover or config.deps %}
+deps =
+    {[testenv]deps}
+{% endif %}
+{% if config.cover %}
+    pytest-cov
+{% endif %}
+{% for dep in config.deps %}
+    {{ dep }}
+{% endfor %}{{ "" }}
+{% endfor %}

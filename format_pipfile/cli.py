@@ -6,6 +6,8 @@ This script performs two tasks:
  * It reformats the ``Pipfile`` to my opinionated standards.
 """
 
+from __future__ import absolute_import
+
 import difflib
 import os
 from builtins import str
