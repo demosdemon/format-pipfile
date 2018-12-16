@@ -76,8 +76,8 @@ def pipfile_source_key(pair):
 
     key = unwrap_key(key)
     norm = key.lower()
-    for idx, (key, _) in enumerate(DEFAULT_SOURCE):
-        if norm == key:
+    for idx, (k, _) in enumerate(DEFAULT_SOURCE):
+        if norm == k:
             return (idx, key)
 
     return (not_found, key)
