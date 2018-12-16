@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+from textwrap import dedent
+
+import path
 import pytest
 import requirementslib.models.requirements as reqm
 from format_pipfile import cli
+from tomlkit import parse
 from tomlkit.items import Key
+
+ROOT = path.Path(__file__).dirname().dirname()
 
 
 def test_cli_help(cli_runner):
@@ -80,7 +86,7 @@ def test_pipfile_packages_key(pypi_packages):
     ("req", "expected"),
     [
         (reqm.Requirement.from_line("Foo.bar"), (True, "foo-bar")),
-        (reqm.Requirement.from_line("-e .."), (False, "format-pipfile")),
+        (reqm.Requirement.from_line("-e {}".format(ROOT)), (False, "format-pipfile")),
         (
             reqm.Requirement.from_line(
                 "git+ssh://git@github.com/demosdemon/format-pipfile.git@master#egg=format-pipfile"
@@ -92,3 +98,99 @@ def test_pipfile_packages_key(pypi_packages):
 def test_requirement_sort_key(req, expected):
     res = cli.requirement_sort_key(req)
     assert res == expected
+
+
+@pytest.mark.parametrize(
+    ("source", "expected"),
+    [
+        (
+            """
+            [[source]]
+            "name" = "pypi"
+            "url" = "https://pypi.org/simple"
+            "verify_ssl" = true
+            """,
+            True,
+        ),
+        (
+            """
+            [[source]]
+            name = "pypi"
+            url = "https://pypi.org/simple"
+            verify_ssl = true
+            """,
+            True,
+        ),
+        (
+            """
+            [[source]]
+            'name' = "pypi"
+            'url' = "https://pypi.org/simple"
+            'verify_ssl' = true
+            """,
+            True,
+        ),
+        (
+            """
+            [[source]]
+            name = "pypi"
+            url = "https://pypi.python.org/simple"
+            verify_ssl = true
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            name = "pypi"
+            url = "https://test.pypi.org/simple"
+            verify_ssl = true
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            name = "pip"
+            url = "https://pypi.org/simple"
+            verify_ssl = true
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            name = "pypi"
+            url = "https://pypi.org/simple"
+            verify_ssl = false
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            name = "pypi"
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            url = "https://pypi.org/simple"
+            """,
+            False,
+        ),
+        (
+            """
+            [[source]]
+            verify_ssl = true
+            """,
+            False,
+        ),
+    ],
+)
+def test_is_default_source(source, expected):
+    source = parse(dedent(source))
+    sources = source.get("source")
+    assert len(sources) == 1
+    assert cli.is_default(sources[0]) == expected
