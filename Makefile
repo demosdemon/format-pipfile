@@ -40,6 +40,7 @@ format: format-pipfile $(PYTHON)
 	$(VIRTUAL_ENV)/bin/python-modernize --nobackup --write $(python_code)
 	$(PYTHON) -m isort --recursive $(python_code)
 	$(PYTHON) -m black $(python_code)
+	$(PYTHON) ci/bootstrap.py
 
 format-pipfile:
 	$(PYTHON) -m format_pipfile
