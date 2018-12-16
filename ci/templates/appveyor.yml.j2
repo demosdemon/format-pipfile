@@ -8,7 +8,7 @@ environment:
   matrix:
 {% for arch in ("32", "64") %}
 {% for env, config in environments|dictsort if config.windows %}
-    - TOXENV: '{{ env }}{% if config.cover %},report,coveralls,codecov,ocular{% endif %}'
+    - TOXENV: '{{ env }}{% if config.cover %},report{% endif %}'
       TOXPYTHON: C:\Python{{ config.pyenv[2:4] }}{% if arch == "64" %}-x64{% endif %}\python.exe
 {% if arch == "64" and env.startswith(("py2", "py34")) %}
       WINDOWS_SDK_VERSION: v7.{{ '1' if env.startswith('py34') else '0' }}
