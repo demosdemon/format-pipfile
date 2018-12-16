@@ -5,8 +5,6 @@ import pytest
 from format_pipfile import cli
 from tomlkit.items import Key
 
-from . import pypi_packages
-
 
 def test_cli_help(cli_runner):
     result = cli_runner.invoke(cli.main, ["--help"], prog_name="format-pipfile")
@@ -72,8 +70,8 @@ def test_pipfile_section_key(pair, expected):
     assert res == expected
 
 
-def test_pipfile_packages_key():
-    for package_name, package_id in pypi_packages():
+def test_pipfile_packages_key(pypi_packages):
+    for package_name, package_id in pypi_packages:
         result = cli.pipfile_packages_key((package_name, {}))
         assert result == (False, package_id)
 
