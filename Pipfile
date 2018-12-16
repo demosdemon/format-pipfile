@@ -27,6 +27,7 @@
 "ipython" = "*"
 "isort" = "*"
 "Jinja2" = "*"
+"lxml" = "*"
 "matrix" = "*"
 "modernize" = "*"
 "pytest" = "*"

@@ -22,7 +22,7 @@ from tomlkit.container import Container
 from tomlkit.items import AoT, Key, KeyType, Table, Trivia
 from tomlkit.toml_document import TOMLDocument  # noqa
 
-MaybeKey = Union[str, Key]
+MaybeKey = Union[str, Key, None]
 ContainerItem = Tuple[MaybeKey, Any]
 SortKeyFunc = Callable[[ContainerItem], Hashable]
 

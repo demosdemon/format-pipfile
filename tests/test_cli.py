@@ -2,8 +2,11 @@
 from __future__ import absolute_import
 
 import pytest
+import requests
 from format_pipfile import cli
 from tomlkit.items import Key
+
+from . import html
 
 
 def test_cli_help(cli_runner):
@@ -23,6 +26,7 @@ def test_unwrap_key():
     k = Key("test")
     assert cli.unwrap_key(k) == "test"
     assert cli.unwrap_key("test") == "test"
+    assert cli.unwrap_key(None) is None
 
 
 def test_reorder_container():
@@ -67,3 +71,42 @@ def test_pipfile_source_key(pair, expected):
 def test_pipfile_section_key(pair, expected):
     res = cli.pipfile_section_key(pair)
     assert res == expected
+
+
+def pypi_packages():
+    """Return a tuple (Package Name, Package ID) from PyPI simple index."""
+    tree = None
+    tries = 0
+    while tree is None:
+        try:
+            res = requests.get("https://pypi.org/simple/")
+            res.raise_for_status()
+        except requests.HTTPError:
+            if tries > 5:
+                raise
+
+            import time
+
+            time.sleep(1 * tries)
+            tries += 1
+        else:
+            tree = html.fromstring(res.content)
+
+    for anchor in tree.xpath("/html/body/a"):
+        name = anchor.text
+        href = anchor.get("href")
+        segments = href.split("/")
+        assert len(segments) == 4
+        assert segments[0] == segments[3] == ""
+        assert segments[1] == "simple"
+        pkgid = segments[2]
+
+        yield (name, pkgid)
+
+
+@pytest.mark.parametrize(("package_name", "package_id"), pypi_packages())
+def test_pipfile_packages_key(package_name, package_id):
+    result = cli.pipfile_packages_key((package_name, {}))
+    assert result == (False, package_id)
+    result = cli.pipfile_packages_key((None, {}))
+    assert result == (True, None)
