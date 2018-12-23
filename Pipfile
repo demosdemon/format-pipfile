@@ -4,9 +4,13 @@
 "verify_ssl" = true
 
 [packages]
+"attr" = "*"
 "click" = "*"
 "delegator-py" = "*"
+"enum34" = {markers = "python_version < '3.4'",version = "*"}
 "future" = "*"
+"inflection" = "*"
+"mako" = "*"
 "packaging" = "*"
 "path.py" = "*"
 "requirementslib" = "*"
@@ -15,7 +19,6 @@
 "typing" = {markers = "python_version < '3.6'",version = "*"}
 
 [dev-packages]
-"attr" = "*"
 "bandit" = "*"
 "black" = "*"
 "bumpversion" = "*"
@@ -31,6 +34,7 @@
 "lxml" = "*"
 "matrix" = "*"
 "modernize" = "*"
+"pre-commit" = "*"
 "pytest" = "*"
 "pytest-clarity" = "*"
 "pytest-click" = "*"

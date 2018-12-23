@@ -1,0 +1,218 @@
+---
+$secure:
+  cc_test_reporter_id:
+    $ci:
+      travisci: "YxOwY7BNGCALJ5lGqMKFrb84pFPSJJnRWdhzYZdh4E5w/BADyhzBzg/RK74h9kQ2UBYuqRh2Mbtz5PLy5vocVZ9r/ZOrCiwrQxQIbQ32bapfVgEU1b86LSsRhax3cIxzSWhVIDVIHiadc181nrOjCObBfQrH/TNdjRkyviZSNZouqYFGdQ7cZReKXPaIjKuS+Bfa+miIrJyIYXjPjPIzJY29UCbK/0YW/5Ba1iJRnONQGvWmef1HRfQ4uw3SEiVdpL02CcKMkaxvPdfeoHGdH7PBMQkBK8/e27t1U90YTR6zeD79P1ZpNIxySj3REroO5xUfhVrXhQ9LJT1k4xyq2ISSQzF7Yzaa8eBylv5iJE5FzA04LO3lRKJ4NLNc8uo7KPozR/SMP5o3RDIE/uR8XUdeB2McVo+MHDecOKbYgotBniXFco/HK1oVO72wom/DmEswKsH4ZeexhQDTobsiGVgAUeBDRwC2XcNlDCgBtynHLj4zoOsLfqIENzPQacc2e9ZaFfYCusEqbwOUIDtQsIx+ncIt/cboaTbOzRlYm1lwBQlnwdCmV1mGq3YWizkOGNwaJwEvGBkiKHgTnVbKNu1fKGWCqvRfpzjwC0ZtQFVsCUs6DIgfwC5roHJebuFdWOXTOc+PlkYzmB7xDe/0kMIBT5G6fqiE9DtliP7smXk="
+      appveyor: "1z7vsLcG4PsQM6OXEcR/fke1+NmV+y6bz1RZrWc4XY69sBfKi15uwgh9/0Ck3UAJlve/0+dm/sAhX5/B+Vl0dJIzq9MM98qBfdfx5CtUiA8="
+  codecov_token:
+    $ci:
+      travisci: "om0vcdz+nfuezPvz/L3CxL0HQ2K9zuHqjp4XpmiKqPklVfmPEqH/HNNkC786tti5YLsLwiZKnY+Zp3bZHxcV58Ssriiai0xRT6AsE9GHFbgJ8Anabk4wOHEZa3ID+gDz1j6FMMwfCpM5dEyXiBWEbr/N+qZB32Dz+mk051Ft+OjtkY+8pNXR31PCnH+jxqm2UBXsSBoKcFL5S3HsW6j8FfaSepvbCxmy8MZy9cCKKvIt2PdPAk+Se3DiF6boIyT8oEctudK5JlLM/wG6VV/nxUyE54wF1/ipqmk60cGdD0uY1Eo0g2us/9qKpnSDE4A0/VDG54kSJMGaVTDJS5Zc1MR6LMTnLrEQ5HsOZFuUSA5755La7CuZ+/8VYOh8QVhROfpTgH4m3DIHkLFKnTGZIslzlx6V2wRcxsqLcT0Ag2sS2kRqrvRs+IL9BNyc2k4keD50GOvmlAWuFWz7F2tqqDCjCxeP3/9pS9TpVXhqM9S7safaOh3RikpK55qSh5Ie6x8sglFkaJAaqdtMY3FsQ5IntRmmvd6Ww19uiu5RCLa6w/UrWrmV37Caoc52BHgfZl80mS8LNkqnklQKaibreCZx8XlvUHGUzfMWZBvHG5YYsRPsxrypeZLrJiDjxYEQZ3Uq3IGxRltZ10bFwyvA/5IFBRHLrAglNXZlVk74L5U="
+      appveyor: "zr4UZI23g97tyqwiKT1XRozBMlP90YXgEe1llQKcs+5dkzhhAmEGkYU7L/c83w6Z"
+  coveralls_repo_token:
+    $ci:
+      travisci: "LNYbuSwlXUTqiSve1liSroBf/ug5cnoCeQmbeGHKKVRsjX1pq83Fb5PCyqqLuAOPvA4mrtvlVQiVCCevzYUmHKu7U/QHPeToMNB6HV9vmNrUWFyKXfmH3tFHYMnwtOirPF+tBzmjCWEUZiF6vNYSnZr3DapJiJXg2g/RH9+LFWR+G3if8UOAB6RGUTxJ+m0WMZJGnPfYENl0jfudJl1+pHEfq7TPYX8f5Su2uQE+FGECgu01FW2r/M2zS/qb/g119Zpf3KmmHhthnTCNtUaReKFtTE6S+kVTUoBetdBdv4354fkbNo441It8zFQei07INq4Xx1Id2FasUnrd79JnrVKHPk4jZc0gfk1Hcet27K84mmlKkvNEzN4ple06ddQPTUKiXFipXmfVXa+iSy5jDJfdDgNORNsJKzepIH0IMsMR7z8/lzCszfWA2CLHY21Pk6qME5cD1wVWiBnbJxCanoaEueyOlcqZV252QZd+4Lfd/LEtIcGNWaVkM7VxD3jiFdW537Jh5TTVhiuR+zXnRJn7r2V9IxEJjQzNvPWaaX8WyAEGquy08PFpsgi6j5+96OJmI45vCqRuz3rsRLCxclLDU6rFkWlw/n4VszvtINjNqBNOV0wIjQdsA4KaDmhunSzelDMlxOSPZmLPBzcQUZ/uNGkTcUjqRbMslVdvHl4="
+      appveyor: "DDz9giK7HmGAaVV3ldtqacv9Ax6+Asrebu617FNhTZ46xUUD9q7gVn1O4jF4h9Ro"
+  pypy_password:
+    $ci:
+      travisci: "a8zQ39p3ulPLFa8pi/7bFQD0vkXLYTjiwwma1LKINPj6r4wlxzkDaqMVPpToWlj/sJaj3pDTcoO7A5kZNWD9qnlk8kTWeLLwo6/9m30CUe2SBw09lIsZYlEhXbAu8H7hXGu4DyGtBvCBhlYuPzDi87mCloO9Bfy/IUeNk5+XyVVLLFy33hhrPQR4A+xoF9a3zg8tAlEMNNbu9KM4dIiGZYVrsuGs2ctw1/P+BJT2epzZzZvJFmxPmji/kJKNxApHIgzI6DW533QbE3xbwOYs7Y9TCXjwIvTj+NTLpjLHoWFIqIiurGGqLunWozCr9s6LEsxgnhRzaZ1EvGQC3qUt3WL8oeuusn6LieL5+MhdqkvqcjI+Tjr76wSz1dUryKXvW0b3NhIoOsC5bZiEae8mJ67QJYCUIS8ce3xT+X2j8Vi0zQ09e4+VpYYO4Ru6T6ICTedPVnldAU+38NSvReh2YUjt3/TsdHSBFRgq5f3zpBD+YCHkMdzhIk/6QdCo1BqVkrhFkKqR3v8nYOvcz0ddvOMln4TOSAAaNtUgrLgCJ78ZxsnOehP5BeGdLB7xuRP/b8dUP4a6pmxrEfKvKYGPshigizmosREeOMDwIGOnkL2ZXP13WG4RGlGHqyweEzffgc2+0Neg0eqtE/0alL8ZSI4mb4VS+6Fu0BL8q0syaKk="
+      appveyor: "hptaBtT9YO1n8LMeftBtEDbX+twnAOwEocm3lsm2iraUd1nTaejd7KrCNq6fSY3QPWwSCtpQ888WETF6DBKVeP6q1RCUzi07lp9wgYAp6+I="
+  scrutinizerci_access_password:
+    $ci:
+      travisci: "Tthp9CotkKgjGE5Ph6X61ptEHoAWa778dkk73e0X0sBAGm+QFgwIRhsR9iffDOZrLQ9YeIVxtcCXL9/KadBZsdwpFJqHkhddcFAopHGZ/PyZCIyl7Al6VRWoSalnjuL8iVi1ELrcB173y3gR2/hvv+/wQ1au38Qm7d66E22uyR7Zx9eFH78uwCPQ8HbanPjdUPbNVbyESvMvWG4vcreWZBFy5IaBvuUltTFG68GNQ3t35UYCFXwF8H4vCZHjyWoZoT+hRn41tUFKj1EZWjJZpCzBY8WjVkaonbJmUtJQPqe/3HeALfNQP8P53nLVv64HX1+2Yz7cAVHZVG7yAFgyxTkTgz5xAZ8TBDmme9ZUWC+aWtGXzoujqEImKtZlibhjW9NTLxsdr+ZwcaGIRzIPfOfCxY6isbnoq/M8GbCX3xWvyNSFxD+Ahet+P72503as94pOEoEtYGb3VVLWrIE+WulZhOzEYLOH3ACGEeaA5e6PE1l99L4CSeP7mRHzNvdWQQ00uaS6SCanS0bg2oNr5vjeY2MX/Pl/W9PMmaZb8LuEAwbC9y2U3LwzSwdEO+Zh0/OBCdZkOMLKnNeG5yyTuR+M1VQ25yLuTmjdP1MbGU0FtQUHXofanCqQBp8hIrRLnMtdvqxpV37/BZtUhwEa2UqdoSqxpjTOew5rzkCNR80="
+      appveyor: "GegxcpzVvrH1di4GQpBYYweEsjO3300H4KyycEoUuGQbO70gGMy/yZlqsToc/7Ch07fNPp11seK5QAIbzoER0EkubG2PJhMiYuvGAB1qRXc="
+
+$variables:
+  cpython_versions:
+    - 2.6.9
+    - 2.7.15
+    - 3.4.9
+    - 3.5.6
+    - 3.6.7
+    - 3.7.1
+    - 3.8-dev
+  pypy_versions:
+    - pypy2.7-6.0.0
+    - pypy3.5-6.0.0
+
+$matrix:
+  python:
+    $merge:
+      - $for: value
+        $in: map(parse_version, cpython_versions)
+        $yield:
+          ? $mako: py${value.major}${value.minor}
+          : $merge:
+              - cpython: true
+                py:
+                  $mako: ${value.major}.${value.minor}
+                exe:
+                  $mako: python${value.major}${value.minor}
+                version:
+                  $mako: ${value} # as string
+              - $if: value >= '3.7'
+                $then:
+                  $ci:
+                    travisci:
+                      dist: xenial
+                      sudo: required
+      - $for: value
+        $in: pypy_versions
+        $yield:
+          ? $mako: ${value[:5]}
+          : cpython: false
+            py:
+              $mako: ${value[4:7]}
+            exe:
+              $mako: ${value[:5].rstrip("2")}
+            version:
+              $mako: ${value}
+  cover:
+    cover: true
+    nocov: false
+
+$ci:
+  travisci:
+    language: python
+    sudo: false
+    cache:
+      - pip
+      - $mako: ${pyenv_cache_path or "$HOME/.pyenv_cache"}
+    env:
+      global:
+        LD_PRELOAD: /lib/x86_64-linux-gnu/libSegFault.so
+        SEGFAULT_SIGNALS: all
+        CC_TEST_REPORTER_ID:
+          $secure: cc-test-reporter-id
+        CODECOV_TOKEN:
+          $secure: codecov-token
+        COVERALLS_REPO_TOKEN:
+          $secure: coveralls-repo-token
+
+  appveyor:
+    $matrix:
+      arch:
+        x86:
+          arch: "32"
+          suffix: ""
+        x64:
+          $merge:
+            - arch: "64"
+              suffix: "-x64"
+            - $if: python.cpython and
+          setenv:
+            WINDOWS_SDK_VERSION:
+              $if: ${python.exe.startswith("python") and python.py < 3.4}
+              $template: v7.${"1" if python.py == "python34" else "0"}
+
+    version: "{branch}-{build}"
+    build: off
+    cache:
+      - '%LOCALAPPDATA%\pip\Cache'
+      - '%LOCALAPPDATA%\pyenv\Cache'
+    environment:
+      global:
+        WITH_COMPILER: cmd /E:ON /V:ON /C .\ci\appveyor-with-compiler.cmd
+
+$environments:
+  $*:
+    setenv:
+      PYTHONUNBUFFERED: yes
+    passenv:
+      - "*"
+  default:
+    deps:
+      - $template: -r${ROOT}/test-requirements.txt
+      - $template: |
+          % if cover:
+          pytest-cov
+          % endif
+    commands:
+      - $template: |
+          % if cover:
+          pytest --cov --cov-report=term-missing -vv
+          % else:
+          pytest -vv
+          % endif
+
+  check:
+    expose: true
+    deps:
+      - bandit
+      - black; python_version>='3.6'
+      - flake8
+      - flake8-bugbear
+      - flake8-builtins
+      - flake8-comprehensions
+      - isort
+    skip_install: true
+    commands:
+      - bandit --recursive --aggregate file --verbose setup.py format_pipfile
+      - flake8 setup.py format_pipfile
+      - template: |
+          % if python_version.python < '3.6':
+          true
+          % else:
+          black --verbose --check --diff setup.py format_pipfile
+          % endif
+      - isort --verbose --check-only --diff --recursive setup.py format_pipfile
+  docs:
+    emit: false
+    deps:
+      - -r{toxinidir}/docs/requirements.txt
+    commands:
+      - sphinx-build {posargs:-E} -b doctest docs dist/docs
+      - sphinx-build {posargs:-E} -b html docs dist/docs
+      - sphinx-build -b linkcheck docs dist/docs
+  coveralls:
+    deps:
+      - coveralls
+    skip_install: true
+    commands:
+      - coveralls
+  codecov:
+    deps:
+      - codecov
+    skip_install: true
+    commands:
+      - coverage xml --ignore-errors
+      - codecov []
+  ocular:
+    deps:
+      - scrutinizer-ocular
+    skip_install: true
+    commands:
+      - ocular
+  report:
+    expose: true
+    deps:
+      - coverage
+    skip_install: true
+    commands:
+      - coverage report
+      - coverage html
+  clean:
+    deps:
+      - coverage
+    skip_install: true
+    commands:
+      - coverage erase
+  nocov:
+    expose: true
+    deps:
+      - -r{toxinidir}/test-requirements.txt
+    commands:
+      - pytest -vv
+  cover:
+    expose: true
+    before:
+      - clean
+    after:
+      - report
+      - coveralls
+      - codecov
+      - ocular
+    deps:
+      - -r{toxinidir}/test-requirements.txt
+      - pytest-cov
+    commands:
+      - pytest --cov --cov-report=term-missing -vv

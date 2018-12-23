@@ -1,6 +1,10 @@
+attr
 click
 delegator-py
+enum34 ; python_version < '3.4'
 future
+inflection
+mako
 packaging
 path.py
 requirementslib

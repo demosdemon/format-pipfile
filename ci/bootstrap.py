@@ -5,21 +5,9 @@ from __future__ import absolute_import, division, print_function
 
 import os
 
-import attr
 import jinja2
 import matrix
 import path
-from format_pipfile.validators import is_
-
-
-@attr.s
-class Environment(object):
-    #: The NAME used in ``[testenv:NAME]``
-    name = attr.ib(type=str, validator=is_(str.isidentifier))
-    #: Whether or not the environment is exposed in {[tox]envlist}
-    expose = attr.ib(type=bool)
-    #: The name or path to a python interpreter
-    basepython = attr.ib(type=str)
 
 
 def load_matrix(base_path):
