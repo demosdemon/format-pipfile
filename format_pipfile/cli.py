@@ -26,7 +26,7 @@ MaybeKey = Union[str, Key]
 ContainerItem = Tuple[MaybeKey, Any]
 SortKeyFunc = Callable[[ContainerItem], Hashable]
 
-ROOT_PATH = os.path.normpath(os.path.join(os.path.dirname(__file__), os.pardir))
+ROOT_PATH = os.getcwd()
 ROOT_REQUIREMENTS = os.path.join(ROOT_PATH, "requirements.txt")
 ROOT_PIPFILE = os.path.join(ROOT_PATH, "Pipfile")
 PIPFILE_SECTIONS = ("source", "packages", "dev-packages", "requires", "scripts")
