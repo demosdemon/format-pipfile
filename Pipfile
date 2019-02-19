@@ -4,9 +4,13 @@
 "verify_ssl" = true
 
 [packages]
+"attr" = "*"
 "click" = "*"
 "delegator-py" = "*"
+"enum34" = {markers = "python_version < '3.4'",version = "*"}
 "future" = "*"
+"inflection" = "*"
+"mako" = "*"
 "packaging" = "*"
 "path.py" = "*"
 "requirementslib" = "*"
@@ -27,8 +31,10 @@
 "ipython" = "*"
 "isort" = "*"
 "Jinja2" = "*"
+"lxml" = "*"
 "matrix" = "*"
 "modernize" = "*"
+"pre-commit" = "*"
 "pytest" = "*"
 "pytest-clarity" = "*"
 "pytest-click" = "*"

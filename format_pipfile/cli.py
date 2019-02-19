@@ -22,7 +22,7 @@ from tomlkit.container import Container
 from tomlkit.items import AoT, Key, KeyType, Table, Trivia
 from tomlkit.toml_document import TOMLDocument  # noqa
 
-MaybeKey = Union[str, Key]
+MaybeKey = Union[str, Key, None]
 ContainerItem = Tuple[MaybeKey, Any]
 SortKeyFunc = Callable[[ContainerItem], Hashable]
 
@@ -76,8 +76,8 @@ def pipfile_source_key(pair):
 
     key = unwrap_key(key)
     norm = key.lower()
-    for idx, (key, _) in enumerate(DEFAULT_SOURCE):
-        if norm == key:
+    for idx, (k, _) in enumerate(DEFAULT_SOURCE):
+        if norm == k:
             return (idx, key)
 
     return (not_found, key)
